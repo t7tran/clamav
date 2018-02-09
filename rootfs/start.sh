@@ -1,5 +1,7 @@
 #!/bin/sh
 
+chown clamav:clamav /clamav
+
 # Bootstrap the database if clamav is running for the first time
 [ -f /clamav/main.cvd ] || freshclam
 
