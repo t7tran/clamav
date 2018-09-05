@@ -8,6 +8,7 @@ chown clamav:clamav /clamav
 # Run the update daemon
 gosu clamav freshclam -d -c 6
 
+sed -i "s/^StreamMaxLength 10M$/StreamMaxLength ${STREAM_MAX_LENGTH:-10M}/g" /etc/clamav/clamd.conf
 sed -i "s/^MaxScanSize 150M$/MaxScanSize ${MAX_SCAN_SIZE:-150M}/g" /etc/clamav/clamd.conf
 sed -i "s/^MaxFileSize 30M$/MaxFileSize ${MAX_FILE_SIZE:-30M}/g" /etc/clamav/clamd.conf
 sed -i "s/^MaxRecursion 10$/MaxRecursion ${MAX_RECURSION:-10}/g" /etc/clamav/clamd.conf
