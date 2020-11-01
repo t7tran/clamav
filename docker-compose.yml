@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  clamav:
+    image: coolersport/clamav
+    read_only: true
+    volumes:
+    - clamav:/clamav:rw
+    - tmp:/run/clamav:rw
+    - tmp:/tmp:rw
+  client:
+    image: coolersport/clamav
+    working_dir: /client
+    depends_on:
+    - clamav
+    entrypoint:
+    - sh
+    command:
+    - -c
+    - tail -f /dev/null
+    volumes:
+    - ./client/clamd.conf:/etc/clamav/clamd.conf:ro
+    - ./client:/client:rw
+volumes:
+  clamav:
+    labels:
+    - "keep=true"
+    - "app=clamav"
+  tmp:
+    labels:
+    - "app=clamav"
