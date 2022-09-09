@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM alpine:3.16
 
 COPY --chown=100:101 rootfs /
 

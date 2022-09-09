@@ -1,14 +1,14 @@
 version: '3.4'
 services:
   clamav:
-    image: t7tran/clamav:0.104.1
+    image: t7tran/clamav:0.104.3
     read_only: true
     volumes:
     - clamav:/clamav:rw
     - tmp:/run/clamav:rw
     - tmp:/tmp:rw
   client:
-    image: t7tran/clamav:0.104.1
+    image: t7tran/clamav:0.104.3
     working_dir: /client
     depends_on:
     - clamav
