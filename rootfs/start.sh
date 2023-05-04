@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env sh
+
+if [[ $1 == "client" ]]; then
+  trap : TERM INT; tail -f /dev/null & wait
+  exit 0
+fi
 
 # Bootstrap the database if clamav is running for the first time
 [ -f /clamav/main.cvd ] || freshclam
