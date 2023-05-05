@@ -1,32 +1,30 @@
-version: '3.4'
+version: "3.4"
 services:
   clamav:
-    image: ghcr.io/t7tran/clamav:0.105.2
+    image: ghcr.io/t7tran/clamav:0.105.2-2
     read_only: true
     volumes:
-    - clamav:/clamav:rw
-    - tmp:/run/clamav:rw
-    - tmp:/tmp:rw
+      - clamav:/clamav:rw
+      - tmp:/run/clamav:rw
+      - tmp:/tmp:rw
   client:
-    image: ghcr.io/t7tran/clamav:0.105.2
+    image: ghcr.io/t7tran/clamav:0.105.2-2
     read_only: true
     working_dir: /client
     depends_on:
-    - clamav
-    entrypoint:
-    - sh
+      - clamav
     command:
-    - -c
-    - tail -f /dev/null
+      - client
+    environment:
+      - CLAMDSCAN_TCPADDR=clamav
     volumes:
-    - ./client/clamd.conf:/etc/clamav/clamd.conf:ro
-    - ./client:/client:rw
-    - tmp:/tmp:rw
+      - ./client:/client:rw
+      - tmp:/tmp:rw
 volumes:
   clamav:
     labels:
-    - "keep=true"
-    - "app=clamav"
+      - "keep=true"
+      - "app=clamav"
   tmp:
     labels:
-    - "app=clamav"
+      - "app=clamav"
