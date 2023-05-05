@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+clamdscan --config-file=<(envsubst < /etc/clamav/clamdscan.conf) "$@"
