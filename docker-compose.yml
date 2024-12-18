@@ -1,14 +1,14 @@
 version: "3.4"
 services:
   clamav:
-    image: ghcr.io/t7tran/clamav:1.2.2
+    image: ghcr.io/t7tran/clamav:1.4.1
     read_only: true
     volumes:
       - clamav:/clamav:rw
       - tmp:/run/clamav:rw
       - tmp:/tmp:rw
   client:
-    image: ghcr.io/t7tran/clamav:1.2.2
+    image: ghcr.io/t7tran/clamav:1.4.1
     read_only: true
     working_dir: /client
     depends_on:
